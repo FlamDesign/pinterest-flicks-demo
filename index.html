@@ -214,12 +214,12 @@ main{padding:var(--top) 16px 96px calc(var(--rail) + 16px)}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 .gpill{position:fixed;right:20px;bottom:20px;z-index:70;display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:999px;background:#111;color:#fff;font-weight:700;font-size:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
 .gpill i{font-style:normal;background:var(--red);border-radius:999px;font-size:11px;padding:2px 8px}
-.guide{position:fixed;right:20px;bottom:76px;width:min(380px,calc(100vw - 24px));max-height:min(72vh,640px);overflow:auto;background:#fff;border-radius:24px;box-shadow:0 12px 48px rgba(0,0,0,.25);padding:14px;z-index:70;display:none}
+.guide{position:fixed;right:20px;bottom:76px;width:min(260px,calc(100vw - 24px));max-height:min(72vh,640px);overflow:auto;background:#fff;border-radius:24px;box-shadow:0 12px 48px rgba(0,0,0,.25);padding:14px;z-index:70;display:none}
 .guide.on{display:block;animation:up .25s var(--ease)}
 .guide h4{margin:4px 8px 2px;font-size:16px}
 .guide .gs{margin:0 8px 10px;font-size:12.5px;color:var(--ink2)}
 .guide .gh{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#767676;margin:12px 8px 6px}
-.guide button{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;padding:10px;border-radius:14px}
+.guide button{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:9px 10px;border-radius:14px}
 .guide button:hover{background:var(--chip)}
 .guide button .n{width:24px;height:24px;border-radius:50%;background:#111;color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center;flex:none;margin-top:1px}
 .guide button b{display:block;font-size:14px}
@@ -872,24 +872,18 @@ qEl.addEventListener("keydown", e=>{
 
 /* ================= ad formats guide ================= */
 const FORMATS = [
-  {h:"Home feed"},
-  {t:"Standard Pin", s:"Levi's Flick in the home feed. Tap a look to switch it.", go:"#home", a:"home:levis:std"},
-  {t:"Max-width video", s:"Nike Flick across the full feed width.", go:"#home", a:"home:nike:max"},
-  {t:"Idea ad (9:16)", s:"Acer Flick, full-height. Switch laptops in the video.", go:"#home", a:"home:acer:idea"},
-  {t:"Quiz ad", s:"Cadillac quiz that ends on a Flick of your match.", go:"#home", a:"home:cad:quiz"},
-  {h:"Search"},
-  {t:"Top of Search: Fashion", s:"\"fall outfits women\" opens on the Gap Flick.", go:"#search/fall%20outfits%20women", a:"s-fashion:gap:tos"},
-  {t:"Collection ad: Food", s:"\"easy breakfast ideas\": General Mills Flick with three cereals synced below.", go:"#search/easy%20breakfast%20ideas", a:"s-food:gm:coll"},
-  {t:"Shopping ads: Holiday gifts", s:"\"gifts for him\": Sony, Bose (Best Buy) and Cross Flicks with an Acer Idea ad.", go:"#search/gifts%20for%20him", a:"s-gifts:sony:tos"},
-  {t:"Top of Search: Autos", s:"\"luxury SUV\": Bentley, then Cadillac and Mercedes-Benz.", go:"#search/luxury%20SUV", a:"s-autos:bentley:tos"},
-  {t:"Top of Search: Snacks, Pets, Outdoor", s:"Doritos on \"game day snacks\", BARK on \"dog toys\", Patagonia on \"hiking outfits\".", go:"#search/game%20day%20snacks", a:"s-food:dor:tos"},
-  {h:"Close-up and visual search"},
-  {t:"Pin close-up", s:"Gap Flick full size; the products below follow each switch.", go:"#pin/f-gap"},
-  {t:"Visual search ad", s:"Search a car photo; the Mercedes-Benz Flick leads the similar results.", go:"#lens", a:"lens:merc:vsa"}
+  {t:"Standard Pin", go:"#home", a:"home:levis:std"},
+  {t:"Max-width video", go:"#home", a:"home:nike:max"},
+  {t:"Idea ad", go:"#home", a:"home:acer:idea"},
+  {t:"Quiz ad", go:"#home", a:"home:cad:quiz"},
+  {t:"Top of Search", go:"#search/fall%20outfits%20women", a:"s-fashion:gap:tos"},
+  {t:"Collection ad", go:"#search/easy%20breakfast%20ideas", a:"s-food:gm:coll"},
+  {t:"Shopping ad", go:"#search/gifts%20for%20him", a:"s-gifts:bose:shop"},
+  {t:"Pin close-up", go:"#pin/f-gap"},
+  {t:"Visual search ad", go:"#lens", a:"lens:merc:vsa"}
 ];
 document.getElementById("gcount").textContent = FORMATS.filter(f=>f.t).length;
-document.getElementById("guide").innerHTML = `<h4>Flicks on Pinterest</h4><p class="gs">Jump to each placement. Every Flick here is a live tag.</p>` +
-  (()=>{ let n=0; return FORMATS.map((f,i)=> f.h ? `<div class="gh">${f.h}</div>` : `<button onclick="jump(${i})"><span class="n">${++n}</span><span><b>${f.t}</b><span>${f.s}</span></span></button>`).join(""); })();
+document.getElementById("guide").innerHTML = FORMATS.map((f,i)=>`<button onclick="jump(${i})"><span class="n">${i+1}</span><b>${f.t}</b></button>`).join("");
 function toggleGuide(on){ const g=document.getElementById("guide"); on = on===undefined ? !g.classList.contains("on") : on; g.classList.toggle("on", on); document.getElementById("gpill").setAttribute("aria-expanded", on); }
 let pendingAnchor=null;
 function jump(i){ const f=FORMATS[i]; toggleGuide(false); pendingAnchor=f.a||null; if(location.hash===f.go) focusAnchor(); else location.hash=f.go; }
