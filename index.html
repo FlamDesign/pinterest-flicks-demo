@@ -61,7 +61,7 @@ main{padding:var(--top) 16px 96px calc(var(--rail) + 16px)}
 
 /* ---------- masonry ---------- */
 .grid{position:relative;margin:0 auto;transition:height .2s}
-.pin{position:absolute;top:0;left:0;animation:fade .45s var(--ease) both;transition:transform .25s var(--ease)}
+.pin{position:absolute;top:0;left:0}
 .pm{position:relative;border-radius:var(--r);overflow:hidden;background:#efefef;cursor:zoom-in}
 .pm img.ph{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s}
 .pm img.ph.ld{opacity:1}
@@ -645,7 +645,7 @@ function colInfo(el){
 function renderGrid(el, items, ctx){
   dropSlots(el);
   const cards = items.map(it => typeof it==="string" ? organicCard(it) : flickCard(it, ctx));
-  el.innerHTML = cards.map((c,i)=>`<div class="pin ${c.flk?"flk":""}" data-span="${c.span}" style="animation-delay:${Math.min(i,14)*30}ms">${c.html}</div>`).join("");
+  el.innerHTML = cards.map((c,i)=>`<div class="pin ${c.flk?"flk":""}" data-span="${c.span}" >${c.html}</div>`).join("");
   GRIDS[el.id] = true;
   layout(el);
   // images change height as they load only if aspect is unknown; aspect-ratio is set, so one pass + a late pass is enough
@@ -657,7 +657,7 @@ function layout(el){
   el.style.width = W+"px";
   const H = new Array(n).fill(0);
   [...el.children].forEach(p=>{
-    const span = p.dataset.span==="all" ? (innerWidth<768 ? n : Math.min(2,n)) : 1;
+    const span = p.dataset.span==="all" ? (innerWidth<768 ? n : Math.min(2,n)) : (innerWidth<768 && p.classList.contains("flk") && n<=2 ? n : 1);
     p.style.width = (cw*span + gap*(span-1)) + "px";
     let col=0, best=Infinity;
     for(let c=0;c<=n-span;c++){ const top=Math.max(...H.slice(c,c+span)); if(top<best-1){best=top;col=c;} }
