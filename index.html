@@ -3,14 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Flicks on Pinterest</title>
+<title>Pinterest</title>
+<link rel="icon" href="https://s.pinimg.com/webapp/favicon_48x48-7470a30d.png">
+<link rel="apple-touch-icon" href="https://s.pinimg.com/webapp/logo_transparent_144x144-3da7a67b.png">
 <meta name="description" content="Clickable concept: Flicks inside Pinterest's home feed, search, Pin close-up, shopping, collection, idea, max-width video, quiz and visual search ad formats.">
 <style>
+@font-face{font-family:"Pin Sans";src:url("https://s.pinimg.com/webapp/Pin-Sans-MacOS-Regular-708c49dd.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Pin Sans";src:url("https://s.pinimg.com/webapp/Pin-Sans-MacOS-Medium-704a4f34.woff2") format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Pin Sans";src:url("https://s.pinimg.com/webapp/Pin-Sans-MacOS-Bold-ce475d98.woff2") format("woff2");font-weight:600 700;font-display:swap}
+@font-face{font-family:"Pin Sans";src:url("https://s.pinimg.com/webapp/Pin-Sans-MacOS-Heavy-2b6abf8c.woff2") format("woff2");font-weight:800 900;font-display:swap}
 :root{
-  --red:#e60023;--red-d:#ad081b;--ink:#111;--ink2:#5f5f5f;--line:#e9e9e9;--chip:#efefef;--chip-h:#e2e2e2;--bg:#fff;
+  --red:#e60023;--red-d:#b60000;--ink:#000;--ink2:#62625b;--line:#e5e5e0;--chip:#e5e5e0;--chip-h:#d6d6d0;--bg:#fff;
   --r:16px;--ease:cubic-bezier(.2,.7,.2,1);
   --rail:72px;--top:80px;--gap:16px;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family:"Pin Sans",-apple-system,system-ui,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
@@ -25,18 +31,19 @@ img{display:block}
 
 /* ---------- shell ---------- */
 .rail{position:fixed;left:0;top:0;bottom:0;width:var(--rail);border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 0;background:#fff;z-index:40}
-.logo{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;margin-bottom:10px}
-.logo span{width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font:700 19px/1 Georgia,"Times New Roman",serif;letter-spacing:-1px}
+.logo{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;margin-bottom:10px;color:var(--red)}
+.logo:hover{background:var(--chip)}
 .rbtn{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;color:#111;transition:background .15s}
 .rbtn:hover{background:var(--chip)}
-.rbtn.on{background:#111;color:#fff}
+.rbtn.on{background:var(--chip);color:#000}
 .rail .sp{flex:1}
 .top{position:fixed;left:var(--rail);right:0;top:0;height:var(--top);display:flex;align-items:center;gap:12px;padding:0 24px;background:#fff;z-index:30}
 .sbox{flex:1;position:relative}
-.sbox input{width:100%;height:48px;border-radius:16px;border:0;background:var(--chip);padding:0 46px 0 48px;font-size:16px;outline:none;color:#111}
+.sbox input{width:100%;height:48px;border-radius:16px;border:0;background:var(--chip);padding:0 46px 0 44px;font-size:16px;outline:none;color:#000}
+.sbox input::placeholder{color:var(--ink2)}
 .sbox input:focus{box-shadow:0 0 0 4px rgba(0,132,255,.35);background:#fff}
-.sbox .ic{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#767676;pointer-events:none}
-.sbox .lensb{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#5f5f5f}
+.sbox .ic{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--ink2);pointer-events:none}
+.sbox .lensb{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#000}
 .sbox .lensb:hover{background:#e2e2e2}
 .sugg{position:absolute;left:0;right:0;top:56px;background:#fff;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.18);padding:12px 8px;display:none;z-index:50}
 .sugg.on{display:block;animation:fade .15s}
@@ -54,9 +61,9 @@ main{padding:var(--top) 16px 96px calc(var(--rail) + 16px)}
 /* ---------- chips ---------- */
 .chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:4px 8px 16px;position:sticky;top:var(--top);background:#fff;z-index:20}
 .chips::-webkit-scrollbar{display:none}
-.chip{flex:none;height:40px;padding:0 16px;border-radius:12px;background:var(--chip);font-weight:600;font-size:15px;white-space:nowrap;display:flex;align-items:center;gap:8px;transition:background .15s}
+.chip{flex:none;height:40px;padding:0 16px;border-radius:12px;background:var(--chip);font-weight:500;font-size:16px;white-space:nowrap;display:flex;align-items:center;gap:8px;transition:background .15s}
 .chip:hover{background:var(--chip-h)}
-.chip.on{background:#111;color:#fff}
+.chip.on{background:#000;color:#fff}
 .chip img{width:28px;height:28px;border-radius:8px;object-fit:cover;margin-left:-8px}
 
 /* ---------- masonry ---------- */
@@ -67,7 +74,7 @@ main{padding:var(--top) 16px 96px calc(var(--rail) + 16px)}
 .pm img.ph.ld{opacity:1}
 .pm .ov{position:absolute;inset:0;background:rgba(0,0,0,.28);opacity:0;transition:opacity .15s;pointer-events:none}
 .pin:hover .pm .ov{opacity:1}
-.pm .save{position:absolute;right:12px;top:12px;height:44px;padding:0 16px;border-radius:24px;background:var(--red);color:#fff;font-weight:700;opacity:0;transition:opacity .15s;z-index:3}
+.pm .save{position:absolute;right:12px;top:12px;height:40px;padding:0 14px;border-radius:16px;background:var(--red);color:#fff;font-weight:500;opacity:0;transition:opacity .15s;z-index:3}
 .pin:hover .pm .save{opacity:1}
 .pm .lensdot{position:absolute;right:12px;bottom:12px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.9);display:grid;place-items:center;opacity:0;transition:opacity .15s;z-index:3}
 .pin:hover .pm .lensdot{opacity:1}
@@ -134,9 +141,9 @@ main{padding:var(--top) 16px 96px calc(var(--rail) + 16px)}
 .cu-bar .ico{width:44px;height:44px;border-radius:50%;display:grid;place-items:center}
 .cu-bar .ico:hover{background:var(--chip)}
 .cu-bar .sp{flex:1}
-.redbtn{height:48px;padding:0 20px;border-radius:24px;background:var(--red);color:#fff;font-weight:700;font-size:16px;display:inline-flex;align-items:center;gap:8px;transition:background .15s}
+.redbtn{height:48px;padding:0 16px;border-radius:16px;background:var(--red);color:#fff;font-weight:500;font-size:16px;display:inline-flex;align-items:center;gap:8px;transition:background .15s}
 .redbtn:hover{background:var(--red-d)}
-.greybtn{height:48px;padding:0 20px;border-radius:24px;background:var(--chip);font-weight:700;font-size:16px;display:inline-flex;align-items:center;gap:8px}
+.greybtn{height:48px;padding:0 16px;border-radius:16px;background:var(--chip);color:#000;font-weight:500;font-size:16px;display:inline-flex;align-items:center;gap:8px}
 .greybtn:hover{background:var(--chip-h)}
 .cu-link{font-size:14px;text-decoration:underline;color:#111;word-break:break-all}
 .cu h1{font-size:28px;line-height:1.2;margin:0;font-weight:600;letter-spacing:-.01em}
@@ -149,6 +156,11 @@ main{padding:var(--top) 16px 96px calc(var(--rail) + 16px)}
 .promoted{font-size:13px;color:var(--ink2)}
 .shopthis h3{font-size:16px;margin:4px 0 10px;font-weight:600}
 .shopthis .row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.shopthis .row.cat{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:2px}
+.shopthis .row.cat::-webkit-scrollbar{display:none}
+.shopthis .row.cat .prod{flex:0 0 calc((100% - 20px)/3.3);scroll-snap-align:start}
+.shopthis .row.cat .pi{aspect-ratio:2/3}
+.shopthis .row.cat .pi img{width:100%;height:100%;object-fit:cover}
 .prod{border-radius:14px;overflow:hidden;background:#f6f6f6;text-align:left;outline:2px solid transparent;outline-offset:-2px;transition:outline-color .25s,transform .25s}
 .prod.on{outline-color:#111;transform:translateY(-2px)}
 .prod .pi{aspect-ratio:1;background:#fff;display:grid;place-items:center}
@@ -244,7 +256,7 @@ main{padding:var(--top) 16px 96px calc(var(--rail) + 16px)}
   .rail{display:none}
   .top{left:0;padding:0 12px;height:var(--top)}
   .top .topbtn,.top .av{display:none}
-  .sbox input{height:44px;border-radius:22px;font-size:15px}
+  .sbox input{height:44px;border-radius:16px;font-size:16px}
   main{padding:var(--top) 8px calc(84px + env(safe-area-inset-bottom)) 8px}
   .chips{padding:4px 0 10px;top:var(--top)}
   .chip{height:36px;font-size:14px;padding:0 14px}
@@ -252,8 +264,8 @@ main{padding:var(--top) 16px 96px calc(var(--rail) + 16px)}
   .pcap .t{font-size:13px}
   .pm .save,.openpin{display:none}
   .mnav{display:flex;position:fixed;left:0;right:0;bottom:0;height:calc(64px + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:#fff;border-top:1px solid var(--line);z-index:60;justify-content:space-around;align-items:center}
-  .mnav button{width:56px;height:48px;display:grid;place-items:center;color:#767676}
-  .mnav button.on{color:#111}
+  .mnav button{width:56px;height:48px;display:grid;place-items:center;color:var(--ink2)}
+  .mnav button.on{color:#000}
   .back{left:10px;top:calc(var(--top) + 6px);width:40px;height:40px}
   .cu-wrap{margin-top:0}
   .cu{border-radius:0 0 24px 24px;box-shadow:none;margin:0 -8px}
@@ -271,24 +283,24 @@ main{padding:var(--top) 16px 96px calc(var(--rail) + 16px)}
 <body>
 
 <nav class="rail" aria-label="Main">
-  <a class="logo" href="#home" aria-label="Home"><span>P</span></a>
-  <button class="rbtn on" id="r-home" onclick="go('#home')" aria-label="Home"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5 2 10.6V22h7.2v-6.5h5.6V22H22V10.6z"/></svg></button>
-  <button class="rbtn" id="r-explore" onclick="openSugg()" aria-label="Explore"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9.5"/><path d="m15.8 8.2-2.2 5.4-5.4 2.2 2.2-5.4z" fill="currentColor"/></svg></button>
-  <button class="rbtn" onclick="toast('Create is not part of this demo')" aria-label="Create"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 4v16M4 12h16"/></svg></button>
-  <button class="rbtn" onclick="toast('Notifications are not part of this demo')" aria-label="Updates"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 16V11a6 6 0 1 0-12 0v5l-2 2h16zM10 21h4"/></svg></button>
-  <button class="rbtn" onclick="toast('Messages are not part of this demo')" aria-label="Messages"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v11H9l-5 4z"/></svg></button>
+  <a class="logo" href="#home" aria-label="Pinterest"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.54 23.15q-.2-2.05.26-3.93L9 14.04a7 7 0 0 1-.35-2.07c0-1.68.81-2.88 2.09-2.88.88 0 1.53.62 1.53 1.8q0 .57-.23 1.28l-.52 1.72q-.15.5-.15.92c0 1.2.91 1.87 2.08 1.87 2.09 0 3.57-2.16 3.57-4.96 0-3.12-2.04-5.12-5.05-5.12-3.36 0-5.49 2.19-5.49 5.24 0 1.22.38 2.36 1.11 3.14-.24.41-.5.48-.88.48-1.2 0-2.34-1.69-2.34-4 0-4 3.2-7.17 7.68-7.17 4.7 0 7.66 3.29 7.66 7.33s-2.88 7.15-5.98 7.15a3.8 3.8 0 0 1-3.06-1.48l-.62 2.5a11 11 0 0 1-1.62 3.67A11.98 11.98 0 0 0 24 12a11.99 11.99 0 1 0-24 0 12 12 0 0 0 7.54 11.15"/></svg></a>
+  <button class="rbtn on" id="r-home" onclick="go('#home')" aria-label="Home"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 1 10v14h8v-7a3 3 0 1 1 6 0v7h8V10z"/></svg></button>
+  <button class="rbtn" id="r-explore" onclick="openSugg()" aria-label="Explore"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.87 12.9a1.25 1.25 0 1 0-.89.37q.52-.01.89-.37m2.27 1.13A2 2 0 0 1 14 15.16l-8.38 3.22L8.84 10a2 2 0 0 1 1.13-1.13l8.61-3.45zm5.35-10.52A12 12 0 1 0 3.52 20.48 12 12 0 0 0 20.49 3.52z"/></svg></button>
+  <button class="rbtn" onclick="toast('Boards are not part of this demo')" aria-label="Boards"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 1h5.75v22H5c-2.2 0-4-1.8-4-4V5c0-2.2 1.8-4 4-4m18 4v5.75h-9.75V1H19c2.2 0 4 1.8 4 4m-9.75 8.25H23V19c0 2.2-1.8 4-4 4h-5.75z"/></svg></button>
+  <button class="rbtn" onclick="toast('Create is not part of this demo')" aria-label="Create"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10.5 10.5H6v3h4.5V18h3v-4.5H18v-3h-4.5V6h-3zM5 1a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h14a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4zm15 4v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1"/></svg></button>
+  <button class="rbtn" onclick="toast('Notifications are not part of this demo')" aria-label="Updates"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 7v6.17A10 10 0 0 1 22 19H2a10 10 0 0 1 3-5.83V7a7 7 0 1 1 14 0m-4 14a3 3 0 1 1-6 0z"/></svg></button>
+  <button class="rbtn" onclick="toast('Messages are not part of this demo')" aria-label="Messages"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 12.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m-6 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m-6-3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3M12 0a11 11 0 0 0-8.52 17.95l-1.46 5.43a.5.5 0 0 0 .73.55l5.08-2.75A10.98 10.98 0 0 0 23 11 11 11 0 0 0 12 0"/></svg></button>
   <div class="sp"></div>
-  <button class="rbtn" onclick="toast('Settings are not part of this demo')" aria-label="Settings"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></button>
+  <button class="rbtn" onclick="toast('Settings are not part of this demo')" aria-label="Settings"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 16.25a4.25 4.25 0 1 1 0-8.5 4.25 4.25 0 0 1 0 8.5M12 0 1.5 6v12L12 24l10.5-6V6z"/></svg></button>
 </nav>
 
 <header class="top">
   <div class="sbox">
-    <svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/></svg>
+    <svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 16a6 6 0 1 1 .02-12.01A6 6 0 0 1 10 16m13.13 2.88L21 16.75l-2.13-2.13a10 10 0 1 0-4.24 4.24L16.75 21l2.13 2.13a3 3 0 0 0 4.25 0 3 3 0 0 0 0-4.24"/></svg>
     <input id="q" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
-    <button class="lensb" onclick="go('#lens')" aria-label="Search with a photo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><circle cx="12" cy="12" r="3.5"/></svg></button>
+    <button class="lensb" onclick="go('#lens')" aria-label="Search with a photo"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M1 5a4 4 0 0 1 4-4h4v2H5a2 2 0 0 0-2 2v4H1zm22 4h-2V5a2 2 0 0 0-2-2h-4V1h4a4 4 0 0 1 4 4zM5 23a4 4 0 0 1-4-4v-4h2v4c0 1.1.9 2 2 2h4v2zm18-4a4 4 0 0 1-4 4h-4v-2h4a2 2 0 0 0 2-2v-4h2zm-6-7a5 5 0 1 1-10 0 5 5 0 0 1 10 0m-5-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6"/></svg></button>
     <div class="sugg" id="sugg" role="listbox"></div>
   </div>
-  <button class="topbtn" onclick="toast('Notifications are not part of this demo')" aria-label="Notifications"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 16V11a6 6 0 1 0-12 0v5l-2 2h16zM10 21h4"/></svg></button>
   <div class="av" title="Your profile">A</div>
 </header>
 
@@ -306,10 +318,10 @@ main{padding:var(--top) 16px 96px calc(var(--rail) + 16px)}
 </main>
 
 <nav class="mnav" aria-label="Main">
-  <button id="m-home" class="on" onclick="go('#home')" aria-label="Home"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5 2 10.6V22h7.2v-6.5h5.6V22H22V10.6z"/></svg></button>
-  <button id="m-search" onclick="openSugg()" aria-label="Search"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/></svg></button>
-  <button onclick="toast('Create is not part of this demo')" aria-label="Create"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 4v16M4 12h16"/></svg></button>
-  <button onclick="toast('Messages are not part of this demo')" aria-label="Inbox"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v11H9l-5 4z"/></svg></button>
+  <button id="m-home" class="on" onclick="go('#home')" aria-label="Home"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 1 10v14h8v-7a3 3 0 1 1 6 0v7h8V10z"/></svg></button>
+  <button id="m-search" onclick="openSugg()" aria-label="Search"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 16a6 6 0 1 1 .02-12.01A6 6 0 0 1 10 16m13.13 2.88L21 16.75l-2.13-2.13a10 10 0 1 0-4.24 4.24L16.75 21l2.13 2.13a3 3 0 0 0 4.25 0 3 3 0 0 0 0-4.24"/></svg></button>
+  <button onclick="toast('Create is not part of this demo')" aria-label="Create"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10.5 10.5H6v3h4.5V18h3v-4.5H18v-3h-4.5V6h-3zM5 1a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h14a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4zm15 4v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1"/></svg></button>
+  <button onclick="toast('Messages are not part of this demo')" aria-label="Inbox"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 12.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m-6 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m-6-3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3M12 0a11 11 0 0 0-8.52 17.95l-1.46 5.43a.5.5 0 0 0 .73.55l5.08-2.75A10.98 10.98 0 0 0 23 11 11 11 0 0 0 12 0"/></svg></button>
   <button onclick="toast('Profile is not part of this demo')" aria-label="Profile"><div class="av" style="width:28px;height:28px;font-size:12px">A</div></button>
 </nav>
 
@@ -326,6 +338,23 @@ main{padding:var(--top) 16px 96px calc(var(--rail) + 16px)}
    ===================================================================== */
 const IC = id => `https://www.instacart.com/image-server/394x394/filters:fill(FFFFFF,true):format(jpg)/d2lnr5mha7bycj.cloudfront.net/product-image/file/${id}`;
 const BRANDS = {
+  zara:{ name:"Zara", av:"Z", avc:"#000", domain:"zara.com", url:"https://www.zara.com/us/", follow:"", tall:true, catalog:true,
+    embed:"https://serve-dev.ads.flamapp.ai/embed?ad=flCQX4ThyZ2B4cQlMAQD2pu5",
+    title:"The jacket and trouser edit", desc:"Nine jackets and six trousers, styled on one look. Mix the pieces right in the video.",
+    variants:[
+      {n:"Gingham jacket", img:"img/products/zara-jacket-gingham.webp"},
+      {n:"Polka dot jacket", img:"img/products/zara-jacket-dots.webp"},
+      {n:"Navy jacket", img:"img/products/zara-jacket-navy.webp"},
+      {n:"Olive jacket", img:"img/products/zara-jacket-olive.webp"},
+      {n:"Black jacket", img:"img/products/zara-jacket-black.webp"},
+      {n:"Camel jacket", img:"img/products/zara-jacket-camel.webp"},
+      {n:"Cream jacket", img:"img/products/zara-jacket-cream.webp"},
+      {n:"Forest green jacket", img:"img/products/zara-jacket-forest.webp"},
+      {n:"Black trousers", img:"img/products/zara-trousers-black.webp"},
+      {n:"Ivory trousers", img:"img/products/zara-trousers-ivory.webp"},
+      {n:"Dark denim trousers", img:"img/products/zara-trousers-dark-denim.webp"},
+      {n:"Chocolate trousers", img:"img/products/zara-trousers-chocolate.webp"},
+      {n:"Pinstripe trousers", img:"img/products/zara-trousers-pinstripe.webp"}], named:true },
   levis:{ name:"Levi's", av:"L", avc:"#c41230", domain:"levi.com", url:"https://www.levi.com/US/en_US/", follow:"1.2M followers",
     src:"https://native-ads-dev.appless.workers.dev/6a96c6969e74536944c4167f_z64116/ad.js",
     title:"Denim that goes the distance", desc:"Baggy overalls and more from Levi's. Tap a look in the video to switch the outfit.",
@@ -560,7 +589,11 @@ function mount(host){
   s.mounted=true; s.ready=false; s.error=false;
   const f=document.createElement("iframe");
   f.title=`${BRANDS[s.brand].name} Flick: interactive video`; f.setAttribute("allow","autoplay; fullscreen"); f.setAttribute("scrolling","no");
-  f.srcdoc=tagDoc(id, BRANDS[s.brand]);
+  const bd=BRANDS[s.brand];
+  if(bd.embed){
+    f.src=bd.embed;
+    f.addEventListener("load",()=>{ if(!s.mounted) return; s.ready=true; clearTimeout(s.timer); host.classList.add("rdy"); host.querySelector(".fstate")?.classList.add("hide"); host.querySelector(".fwarn")?.remove(); });
+  } else f.srcdoc=tagDoc(id, bd);
   host.prepend(f);
   s.timer=setTimeout(()=>{
     if(s.ready||s.error||!s.mounted) return;
@@ -594,8 +627,8 @@ window.addEventListener("message", e=>{
 
 /* ================= Pin cards ================= */
 const SAVE = `<button class="save" onclick="event.stopPropagation();toast('Saved to your board')">Save</button>`;
-const OPEN_IC = `<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3H3v10h10v-3M9 2h5v5M14 2L7 9"/></svg>`;
-const LENS_IC = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><circle cx="12" cy="12" r="3.5"/></svg>`;
+const OPEN_IC = `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.97 12a2 2 0 0 1-1.99-2V7.81l-7.07 7.1a2 2 0 1 1-2.83-2.83L16.16 5h-2.17a2 2 0 0 1 0-4H23l-.03 9a2 2 0 0 1-2 2M6.75 4a1.25 1.25 0 0 1 0 2.5H3.5v14h14v-3.26a1.25 1.25 0 1 1 2.5 0v4.51c0 .7-.56 1.25-1.25 1.25H2.25C1.56 23 1 22.44 1 21.75V5.25C1 4.56 1.56 4 2.25 4z"/></svg>`;
+const LENS_IC = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M1 5a4 4 0 0 1 4-4h4v2H5a2 2 0 0 0-2 2v4H1zm22 4h-2V5a2 2 0 0 0-2-2h-4V1h4a4 4 0 0 1 4 4zM5 23a4 4 0 0 1-4-4v-4h2v4c0 1.1.9 2 2 2h4v2zm18-4a4 4 0 0 1-4 4h-4v-2h4a2 2 0 0 0 2-2v-4h2zm-6-7a5 5 0 1 1-10 0 5 5 0 0 1 10 0m-5-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6"/></svg>`;
 function dots(id){ return `<span class="dots3">${[0,1,2].map(i=>`<i data-sync="${id}" data-i="${i}" class="${i===0?"on":""}"></i>`).join("")}</span>`; }
 function promoLine(b){ return `<div class="promo">Promoted by <b>${esc(b.name)}</b></div>`; }
 
@@ -725,20 +758,20 @@ function viewPin(key){
     const bk=key.slice(2), b=BRANDS[bk]; if(!b){ go('#home'); return; }
     const id=`cu-${bk}-${slotSeq++}`;
     media = flick(id, bk);
-    const prods = b.variants.map((v,i)=>`<button class="prod ${i===0?"on":""}" data-sync="${id}" data-i="${i}" onclick="openSheet('${bk}','${v.url||""}')">
+    const prods = b.variants.map((v,i)=>`<button class="prod ${i===0&&!b.catalog?"on":""}" data-sync="${id}" data-i="${i}" onclick="openSheet('${bk}','${v.url||""}')">
         <div class="pi">${v.img?`<img src="${v.img}" alt="${esc(v.n)}">`:v.c?`<span class="sw" style="background:${v.c}"></span>`:`<span style="font-weight:700;font-size:22px;color:#999">${i+1}</span>`}</div>
         <div class="pn">${esc(v.n)}<small>${esc(b.name)}</small></div></button>`).join("");
     side = `<div class="cu-bar">
-        <button class="ico" aria-label="More" onclick="toast('Pin options are not part of this demo')"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></button>
-        <button class="ico" aria-label="Share" onclick="toast('Link copied')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3M7 8l5-5 5 5M5 13v7h14v-7"/></svg></button>
+        <button class="ico" aria-label="More" onclick="toast('Pin options are not part of this demo')"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6M3 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6m18 0a3 3 0 1 0 0 6 3 3 0 0 0 0-6"/></svg></button>
+        <button class="ico" aria-label="Share" onclick="toast('Link copied')"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.44 5.44a1.5 1.5 0 1 0 2.12 2.12l.94-.94v6.88a1.5 1.5 0 0 0 3 0V6.62l.94.94a1.5 1.5 0 0 0 2.12-2.12l-3.5-3.5a1.5 1.5 0 0 0-2.12 0zM5 13.5a1.5 1.5 0 0 0-3 0v5A3.5 3.5 0 0 0 5.5 22h13a3.5 3.5 0 0 0 3.5-3.5v-5a1.5 1.5 0 0 0-3 0v5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5z"/></svg></button>
         <span class="sp"></span><button class="redbtn" onclick="toast('Saved to your board')">Save</button></div>
       <div><a class="cu-link" href="javascript:void 0" onclick="shop('${id}')">${esc(b.domain)}</a></div>
       <h1>${esc(b.title)}</h1>
       <p class="d">${esc(b.desc)}</p>
-      <div class="nowshow"><span class="pulse"></span><span>Showing <b data-vname="${id}">${esc(b.variants[0].n)}</b></span><span style="margin-left:auto">${b.price?`<b>${b.price}</b>`:""}</span></div>
+      ${b.catalog?"":`<div class="nowshow"><span class="pulse"></span><span>Showing <b data-vname="${id}">${esc(b.variants[0].n)}</b></span><span style="margin-left:auto">${b.price?`<b>${b.price}</b>`:""}</span></div>`}
       <div><button class="redbtn" onclick="shop('${id}')">Visit site ${OPEN_IC}</button></div>
-      <div class="shopthis"><h3>${b.variants[0].img?"Shop this Pin":"In this Pin"}</h3><div class="row">${prods}</div></div>
-      <div class="brandrow"><span class="av" style="background:${b.avc};color:#fff">${esc(b.av)}</span><div><b>${esc(b.name)}</b><small>${b.follow}</small></div><button class="greybtn" onclick="toast('Following ${esc(b.name)}')">Follow</button></div>
+      <div class="shopthis"><h3>${b.variants[0].img?"Shop this Pin":"In this Pin"}</h3><div class="row ${b.catalog?"cat":""}">${prods}</div></div>
+      <div class="brandrow"><span class="av" style="background:${b.avc};color:#fff">${esc(b.av)}</span><div><b>${esc(b.name)}</b>${b.follow?`<small>${b.follow}</small>`:""}</div><button class="greybtn" onclick="toast('Following ${esc(b.name)}')">Follow</button></div>
       <div class="promoted">Promoted by ${esc(b.name)}</div>`;
     related = relatedFor(bk);
     ctx = "rel-"+bk;
@@ -747,7 +780,7 @@ function viewPin(key){
     const [pid,w,h,title,cat]=p;
     media = `<img src="${U(pid,900)}" alt="${esc(title)}" style="aspect-ratio:${w}/${h}">` + (cat==="autos" ? `<button class="greybtn" style="position:absolute;right:14px;bottom:14px;height:40px;font-size:14px;background:#fff" onclick="go('#lens')">${LENS_IC} Search this image</button>` : "");
     side = `<div class="cu-bar">
-        <button class="ico" aria-label="More" onclick="toast('Pin options are not part of this demo')"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></button>
+        <button class="ico" aria-label="More" onclick="toast('Pin options are not part of this demo')"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6M3 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6m18 0a3 3 0 1 0 0 6 3 3 0 0 0 0-6"/></svg></button>
         <span class="sp"></span><button class="redbtn" onclick="toast('Saved to your board')">Save</button></div>
       <h1>${esc(title)}</h1>
       <div class="brandrow"><span class="av" style="background:#eee;color:#555">${creatorFor(key)[0]}</span><div><b>${esc(creatorFor(key))}</b><small>Photo via Unsplash</small></div><button class="greybtn" onclick="toast('Following')">Follow</button></div>
@@ -755,13 +788,14 @@ function viewPin(key){
     related = relatedOrganic(cat);
     ctx = "rel-"+cat;
   }
-  host.innerHTML = `<button class="back" onclick="history.length>1?history.back():go('#home')" aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 5l-7 7 7 7"/></svg></button>
+  host.innerHTML = `<button class="back" onclick="history.length>1?history.back():go('#home')" aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.78 24a2.2 2.2 0 0 1-1.58-.66L3 12 14.2.66a2.2 2.2 0 0 1 3.15 0c.87.88.87 2.3 0 3.18L9.29 12l8.06 8.16c.87.88.87 2.3 0 3.18-.44.44-1 .66-1.57.66"/></svg></button>
     <div class="cu-wrap"><div class="cu"><div class="cu-media">${media}</div><div class="cu-side">${side}</div></div></div>
     <div class="more-h">More to explore</div><div class="grid" id="g-pin"></div>`;
   renderGrid(document.getElementById("g-pin"), related, ctx);
   observeFlicks();
 }
 const RELATED = {
+  zara:["fa1","fa3",{f:"gap",fmt:"std"},"fa5","fa7","fa2","fa6"],
   levis:["dn1","fa2",{f:"gap",fmt:"std"},"dn2","fa5","dn3","fa7","fa4"],
   gap:["fa1","fa5",{f:"levis",fmt:"std"},"fa3","fa7","dn1","fa2","fa6"],
   nike:["pl1","pl2",{f:"pata",fmt:"std"},"hk3","hk1","pl1"],
@@ -793,7 +827,7 @@ function viewLens(){
   dropSlots(host); scrollTo(0,0);
   document.getElementById("q").value="";
   const [pid,w,h]=P.car1;
-  host.innerHTML = `<button class="back" onclick="history.length>1?history.back():go('#home')" aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 5l-7 7 7 7"/></svg></button>
+  host.innerHTML = `<button class="back" onclick="history.length>1?history.back():go('#home')" aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.78 24a2.2 2.2 0 0 1-1.58-.66L3 12 14.2.66a2.2 2.2 0 0 1 3.15 0c.87.88.87 2.3 0 3.18L9.29 12l8.06 8.16c.87.88.87 2.3 0 3.18-.44.44-1 .66-1.57.66"/></svg></button>
   <div class="lens">
     <div class="lens-img" style="aspect-ratio:${w}/${h}"><img src="${U(pid,800)}" alt="Car on a mountain road"><div class="crop" id="crop" style="left:24%;top:36%;width:52%;height:26%"></div></div>
     <div>
@@ -816,7 +850,7 @@ let qa=[];
 function openQuiz(){ qa=[]; renderQuiz(); document.getElementById("scrim").classList.add("on"); }
 function renderQuiz(){
   const mh=document.getElementById("modal-host"); dropSlots(mh);
-  const close = `<button class="x" onclick="closeModal()" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6 6 18"/></svg></button>`;
+  const close = `<button class="x" onclick="closeModal()" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m15.18 12 7.16-7.16a2.25 2.25 0 1 0-3.18-3.18L12 8.82 4.84 1.66a2.25 2.25 0 1 0-3.18 3.18L8.82 12l-7.16 7.16a2.25 2.25 0 1 0 3.18 3.18L12 15.18l7.16 7.16a2.24 2.24 0 0 0 3.18 0c.88-.88.88-2.3 0-3.18z"/></svg></button>`;
   if(qa.length < QUIZ.length){
     const Q=QUIZ[qa.length];
     mh.innerHTML = `<div class="modal" role="dialog" aria-label="Cadillac quiz">${close}<div class="qhead"><small>Quiz · Cadillac · Question ${qa.length+1} of ${QUIZ.length}</small><h3>${Q.q}</h3></div>
@@ -852,7 +886,7 @@ function renderSugg(){
   const v=qEl.value.trim().toLowerCase();
   const list = v ? SUGG.filter(s=>s.includes(v) || v.split(/\s+/).some(w=>w.length>2 && s.includes(w))) : SUGG;
   const show = (list.length?list:SUGG).slice(0,8);
-  sg.innerHTML = `<h6>${v?"Suggestions":"Popular on Pinterest"}</h6>` + show.map((s,i)=>`<button class="${i===hi?"hi":""}" onmousedown="event.preventDefault();go('#search/${encodeURIComponent(s)}')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/></svg>${esc(s)}${SEARCHES[s].items.some(x=>typeof x!=="string")?"<i>Flick</i>":""}</button>`).join("");
+  sg.innerHTML = `<h6>${v?"Suggestions":"Popular on Pinterest"}</h6>` + show.map((s,i)=>`<button class="${i===hi?"hi":""}" onmousedown="event.preventDefault();go('#search/${encodeURIComponent(s)}')"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 16a6 6 0 1 1 .02-12.01A6 6 0 0 1 10 16m13.13 2.88L21 16.75l-2.13-2.13a10 10 0 1 0-4.24 4.24L16.75 21l2.13 2.13a3 3 0 0 0 4.25 0 3 3 0 0 0 0-4.24"/></svg>${esc(s)}${SEARCHES[s].items.some(x=>typeof x!=="string")?"<i>Flick</i>":""}</button>`).join("");
   sg.dataset.list = JSON.stringify(show);
 }
 function openSugg(){ qEl.focus(); }
@@ -876,7 +910,7 @@ const FORMATS = [
   {t:"Top of Search", go:"#search/fall%20outfits%20women", a:"s-fashion:gap:tos"},
   {t:"Collection ad", go:"#search/easy%20breakfast%20ideas", a:"s-food:gm:coll"},
   {t:"Shopping ad", go:"#search/gifts%20for%20him", a:"s-gifts:bose:shop"},
-  {t:"Pin close-up", go:"#pin/f-gap"},
+  {t:"Pin close-up", go:"#pin/f-zara"},
   {t:"Visual search ad", go:"#lens", a:"lens:merc:vsa"}
 ];
 document.getElementById("gcount").textContent = FORMATS.filter(f=>f.t).length;
