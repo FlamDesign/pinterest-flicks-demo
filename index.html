@@ -329,7 +329,7 @@ const BRANDS = {
   levis:{ name:"Levi's", av:"L", avc:"#c41230", domain:"levi.com", url:"https://www.levi.com/US/en_US/", follow:"1.2M followers",
     src:"https://native-ads-dev.appless.workers.dev/6a96c6969e74536944c4167f_z64116/ad.js",
     title:"Denim that goes the distance", desc:"Baggy overalls and more from Levi's. Tap a look in the video to switch the outfit.",
-    variants:[{n:"Look 1"},{n:"Look 2"},{n:"Look 3"}], named:false },
+    variants:[{n:"Look 1", img:"img/products/levis-1.webp"},{n:"Look 2", img:"img/products/levis-2.webp"},{n:"Look 3", img:"img/products/levis-3.webp"}], named:false },
   gap:{ name:"Gap", av:"GAP", avc:"#0b2a5b", domain:"gap.com", url:"https://www.gap.com/", follow:"890K followers", adConfig:true,
     src:"https://native-ads-dev.appless.workers.dev/mti1bs/ad.js",
     title:"Main character, but chambray", desc:"Three fall layers from Gap. Switch the look right in the video, then shop the piece you picked.",
@@ -340,7 +340,7 @@ const BRANDS = {
   nike:{ name:"Nike", av:"N", avc:"#111", domain:"nike.com", url:"https://www.nike.com/", follow:"2.4M followers",
     src:"https://native-ads-dev.appless.workers.dev/6a97885c9e74536944d35d53_dsefds/ad.js",
     title:"Nike Universa: own your movement", desc:"Training sets built to move with you. Switch looks inside the video.",
-    variants:[{n:"Look 1"},{n:"Look 2"},{n:"Look 3"}], named:false },
+    variants:[{n:"Look 1", img:"img/products/nike-1.webp"},{n:"Look 2", img:"img/products/nike-2.webp"},{n:"Look 3", img:"img/products/nike-3.webp"}], named:false },
   pata:{ name:"Patagonia", av:"P", avc:"#2d3a4a", domain:"patagonia.com", url:"https://www.patagonia.com/home/", follow:"640K followers",
     src:"https://native-ads-dev.appless.workers.dev/6a91088b3252dba34b486df1_q18dy8/ad.js",
     title:"Made for the moment. Built for a lifetime.", desc:"Pick a jacket color and see it on the trail before you buy.",
@@ -373,15 +373,15 @@ const BRANDS = {
   bose:{ name:"Best Buy", av:"BBY", avc:"#0046be", domain:"bestbuy.com", url:"https://www.bestbuy.com/product/bose-quietcomfort-ultra-2nd-gen-true-wireless-noise-cancelling-in-ear-earbuds-black/6628900", follow:"520K followers",
     src:"https://native-ads-dev.appless.workers.dev/6a9733389e74536944cd96bd_baspn2/ad.js",
     title:"Bose QuietComfort Ultra Earbuds (2nd Gen)", desc:"Noise canceling earbuds from Best Buy. Tap a color in the video.", price:"$299.00",
-    variants:[{n:"Color 1"},{n:"Color 2"},{n:"Color 3"}], named:false },
+    variants:[{n:"Color 1", img:"img/products/bose-1.webp"},{n:"Color 2", img:"img/products/bose-2.webp"},{n:"Color 3", img:"img/products/bose-3.webp"}], named:false },
   acer:{ name:"Acer", av:"A", avc:"#5c9e31", domain:"acer.com", url:"https://www.acer.com/us-en", follow:"150K followers", tall:true,
     src:"https://storage.googleapis.com/bucket-fi-development-apps-5b0640d5/app/abc/videos/eeeu318dko8uchkx61k7dwza.js",
     title:"The laptop for every kind of gamer", desc:"Predator Helios Neo 16, Chromebook 314 or Nitro V 16. Switch laptops inside the video.",
-    variants:[{n:"Predator Helios Neo 16"},{n:"Chromebook 314"},{n:"Nitro V 16"}], named:true },
+    variants:[{n:"Predator Helios Neo 16", img:"img/products/acer-1.webp"},{n:"Chromebook 314", img:"img/products/acer-2.webp"},{n:"Nitro V 16", img:"img/products/acer-3.webp"}], named:true },
   cross:{ name:"Cross", av:"C", avc:"#3a2c22", domain:"cross.com", url:"https://www.cross.com/", follow:"60K followers",
     src:"https://native-ads-dev.appless.workers.dev/6a9915fffac7a1784444e730_c3pgst/ad.js",
     title:"A pen worth gifting", desc:"Three finishes, one classic pen. Tap a finish in the video.",
-    variants:[{n:"Finish 1"},{n:"Finish 2"},{n:"Finish 3"}], named:false },
+    variants:[{n:"Finish 1", img:"img/products/cross-1.webp"},{n:"Finish 2", img:"img/products/cross-2.webp"},{n:"Finish 3", img:"img/products/cross-3.webp"}], named:false },
   merc:{ name:"Mercedes-Benz", av:"MB", avc:"#111", domain:"mbusa.com", url:"https://www.mbusa.com/en/vehicles/class/s-class/sedan", follow:"3.1M followers", dark:true,
     src:"https://native-ads.appless.workers.dev/6a9bc07393e71f3ec9b12c81_i3pdeq/ad.js",
     title:"Mercedes-Benz S-Class", desc:"Step inside, then pick a paint. Switch colors in the video.",
@@ -397,7 +397,7 @@ const BRANDS = {
   bark:{ name:"BARK", av:"BB", avc:"#0098d8", domain:"bark.co", url:"https://bark.co/", follow:"970K followers",
     src:"https://native-ads-dev.appless.workers.dev/6a8e82a03252dba34b484fa9_zi294y/ad.js",
     title:"Give your dog exactly what they want", desc:"Three toys, one very good dog. Tap a toy in the video.",
-    variants:[{n:"Toy 1"},{n:"Toy 2"},{n:"Toy 3"}], named:false }
+    variants:[{n:"Toy 1", img:"img/products/bark-1.webp"},{n:"Toy 2", img:"img/products/bark-2.webp"},{n:"Toy 3", img:"img/products/bark-3.webp"}], named:false }
 };
 
 /* ================= organic Pins (photos via Unsplash) ================= */
@@ -612,8 +612,7 @@ function flickCard(it, ctx){
   const vline = b.named ? `<span class="vname" data-vname="${id}">${esc(b.variants[0].n)}</span>` : dots(id);
   if(it.fmt==="coll"){
     return { span:1, flk:true, html:`<div class="toplbl"><i>Top of search</i> Collection</div>
-      <div class="coll" ${anchor}><div class="pm" style="border-radius:0">${flick(id,it.f)}${openBtn}</div>
-      <div class="tiles">${b.variants.map((v,i)=>`<button data-sync="${id}" data-i="${i}" class="${i===0?"on":""}" onclick="openSheet('${it.f}')"><img src="${v.img}" alt="${esc(v.n)}" loading="lazy"><span>${esc(v.n)}</span></button>`).join("")}</div></div>
+      <div class="coll" ${anchor}><div class="pm" style="border-radius:0">${flick(id,it.f)}${openBtn}</div></div>
       <div class="pcap"><div class="t">${esc(b.title)}</div>${promoLine(b)}</div>` };
   }
   if(it.fmt==="quiz"){
